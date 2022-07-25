@@ -27,6 +27,7 @@ guessButton.addEventListener("click", function (e) {
   let inputValue = guessInput.value;
   console.log(inputValue);
   let validLetter = checkLetter(inputValue);
+
   console.log(checkLetter(inputValue));
   makeGuess(validLetter);
 });
@@ -38,7 +39,7 @@ const checkLetter = function (input) {
   } else if (input.length > 1) {
     messages.innerText = "Make sure to put only one letter";
   } else if (!input.match(acceptedLetter)) {
-    messages.innerText = "Not a match! try another letter";
+    messages.innerText = "Please enter a letter, not a symbol";
   } else {
     return input;
   }
@@ -50,6 +51,22 @@ const makeGuess = function (letter) {
     messages.innerText = "You already made that guess!";
   } else {
     guessedLetters.push(guessingLetter);
+    messages.innerText = lettersAlreadyGuessed();
     console.log(guessedLetters);
   }
+};
+
+const lettersAlreadyGuessed = function () {
+  lettersGuessed.innerHTML = "";
+  guessedLetters.forEach((x) => {
+    let li = document.createElement("li");
+    li.innerText = x;
+    lettersGuessed.append(li);
+  });
+};
+
+lettersAlreadyGuessed();
+
+const updateWord = function (arr) {
+  // let wordUpper =
 };

@@ -3,13 +3,14 @@ const guessButton = document.querySelector(".guess");
 const guessInput = document.querySelector(".letter");
 const wordInProgress = document.querySelector(".word-in-progress");
 const remainingGuess = document.querySelector(".remaining");
-const remaininGuessSpan = document.querySelector("span");
+const remainingGuessSpan = document.querySelector("span");
 const messages = document.querySelector(".message");
 const hiddenBtn = document.querySelector(".play-again");
 
 const word = "magnolia";
 const guessedLetters = [];
 console.log(guessedLetters);
+let remainingGuesses = 8;
 
 const placeholder = function (word) {
   const placeholderWord = [];
@@ -53,6 +54,7 @@ const makeGuess = function (letter) {
     guessedLetters.push(guessingLetter);
     lettersAlreadyGuessed();
     console.log(guessedLetters);
+    guessesRemaining(letter);
     updateWord(guessedLetters);
   }
 };
@@ -76,12 +78,29 @@ const updateWord = function (arr) {
     if (arr.includes(letter)) {
       revealWord.push(letter.toUpperCase());
     } else {
-      revealWord.push("");
+      revealWord.push("●");
     }
   }
   wordInProgress.innerText = revealWord.join("");
   checkWin();
   console.log(wordArray);
+};
+
+const guessesRemaining = function (guess) {
+  let wordUpperCase = word.toUpperCase(); // the number still subtracts even when I guess correct letter
+  if (!wordUpperCase.includes(guess)) {
+    messages.innerText = `Your Letter is not in the word`;
+    remainingGuesses -= 1;
+  } else {
+    messages.innerText = `Good Job! Your letter is part of the word`;
+  }
+  if (remainingGuesses === 0) {
+    messages.innerHTML = `Game Over! The word was <span class="highlight>${word}</span>"`;
+  } else if (remainingGuesses === 1) {
+    remainingGuessSpan.innerText = `${remainingGuesses} guess`;
+  } else {
+    remainingGuessSpan.innerText = `${remainingGuesses}`;
+  }
 };
 
 const checkWin = function () {

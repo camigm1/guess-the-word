@@ -51,8 +51,9 @@ const makeGuess = function (letter) {
     messages.innerText = "You already made that guess!";
   } else {
     guessedLetters.push(guessingLetter);
-    messages.innerText = lettersAlreadyGuessed();
+    lettersAlreadyGuessed();
     console.log(guessedLetters);
+    updateWord(guessedLetters);
   }
 };
 
@@ -68,5 +69,24 @@ const lettersAlreadyGuessed = function () {
 lettersAlreadyGuessed();
 
 const updateWord = function (arr) {
-  // let wordUpper =
+  let wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split("");
+  const revealWord = [];
+  for (let letter of wordArray) {
+    if (arr.includes(letter)) {
+      revealWord.push(letter.toUpperCase());
+    } else {
+      revealWord.push("");
+    }
+  }
+  wordInProgress.innerText = revealWord.join("");
+  checkWin();
+  console.log(wordArray);
+};
+
+const checkWin = function () {
+  if (wordInProgress.innerText === word.toUpperCase()) {
+    messages.classList.add("win");
+    messages.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+  }
 };

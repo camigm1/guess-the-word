@@ -81,7 +81,7 @@ const makeGuess = function (letter) {
     guessedLetters.push(guessingLetter);
     lettersAlreadyGuessed();
     console.log(guessedLetters);
-    guessesRemaining(letter);
+    guessesRemaining(guessingLetter);
     updateWord(guessedLetters);
   }
 };

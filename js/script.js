@@ -142,6 +142,7 @@ const checkWin = function () {
 };
 
 const startOver = function () {
+  guessInput.value = "";
   guessButton.classList.add("hide");
   remainingGuess.classList.add("hide");
   lettersGuessed.classList.add("hide");

@@ -36,29 +36,15 @@ const placeholder = function (word) {
 getWord();
 
 guessButton.addEventListener("click", function (e) {
-  messages.innerText = "";
   e.preventDefault();
+  messages.innerText = "";
   let inputValue = guessInput.value;
   console.log(inputValue);
   let validLetter = checkLetter(inputValue);
-
+  guessInput.textContent = "";
   console.log(checkLetter(inputValue));
   makeGuess(validLetter);
 });
-
-// hiddenBtn.addEventListener("click", function () {
-//   messages.classList.remove("win");
-//   messages.innerText = "";
-//   lettersGuessed.innerText = "";
-//   remainingGuesses = 8;
-//   guessedLetters = [];
-//   remainingGuessSpan.innerText = `${remainingGuesses} guesses`;
-//   guessButton.classList.remove("hide");
-//   remainingGuess.classList.remove("hide");
-//   lettersGuessed.classList.remove("hide");
-//   hiddenBtn.classList.add("hide");
-//   getWord();
-// });
 
 const checkLetter = function (input) {
   const acceptedLetter = /[a-zA-Z]/;

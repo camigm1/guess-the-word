@@ -39,11 +39,11 @@ guessButton.addEventListener("click", function (e) {
   e.preventDefault();
   messages.innerText = "";
   let inputValue = guessInput.value;
-  console.log(inputValue);
   let validLetter = checkLetter(inputValue);
-  guessInput.textContent = "";
-  console.log(checkLetter(inputValue));
-  makeGuess(validLetter);
+  if (validLetter) {
+    makeGuess(inputValue);
+  }
+  guessInput.value = "";
 });
 
 const checkLetter = function (input) {
@@ -66,7 +66,7 @@ const makeGuess = function (letter) {
   } else {
     guessedLetters.push(guessingLetter);
     lettersAlreadyGuessed();
-    console.log(guessedLetters);
+
     guessesRemaining(guessingLetter);
     updateWord(guessedLetters);
   }
@@ -96,7 +96,6 @@ const updateWord = function (arr) {
   }
   wordInProgress.innerText = revealWord.join("");
   checkWin();
-  console.log(wordArray);
 };
 
 const guessesRemaining = function (guess) {
